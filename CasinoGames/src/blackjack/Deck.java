@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import blackjack.Card;;
 
@@ -57,9 +58,12 @@ public class Deck {
 	
 	public Card drawCard()
 	{
+		Card toBeReturned;
+		//store the card before returning it so it can be removed from deck first
+		toBeReturned = remainingCards.get(1);
+		discardedCards.add(remainingCards.remove(1));
 		
-		
-		return null;
+		return toBeReturned;
 	}
 	
 	public List<Card> buildDeck()
@@ -94,10 +98,11 @@ public class Deck {
 			countOfCards = getRemainingCards().size() + getDiscardedCards().size();
 		}
 		// Ensure the whole deck is in place 
-		getRemainingCards().addAll(getDiscardedCards());
+		remainingCards.addAll(getDiscardedCards());
 		
 		
 		// Implementation of a Fisher-Yates shuffling algorithm
+		Collections.shuffle(remainingCards);
 		
 	}
 	
