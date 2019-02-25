@@ -19,13 +19,13 @@ public class DealersRules {
 		}
 		
 		
-		if (total > 21 || total < 17) {
+		if (total < 17) {
 			// TODO Function to add images 
 			hitCard = currDeck.drawCard();
 			// Recursion until number is between 17 and 21
 			dealersRule(hitCard,null,currDeck);
 		}
-		if (total > 21) {
+		 else if (total > 21) {
 			//in the function that calls dealersRule if it returns 0 then the dealer has bust
 			return 0;
 		}
