@@ -1,10 +1,37 @@
-package blackjack;
+package models;
 
-import blackjack.Card;
-import blackjack.Deck;
+import java.util.List;
 
-public class DealersRules {
+import models.Card;
+import models.Deck;
+
+public class Dealer extends Player{
+	private Integer totalAmount = 0;
+	public Integer getTotalAmount() { 
+		return totalAmount;
+	}
+
+	private List<Card> cards;
+	public List<Card> getCards() {
+		return cards;
+	}
 	
+		
+	/*
+	 * This method checks the dealer has less than 16 in order to
+	 * get a new card or not
+	 */
+	public Boolean checkNewCard()
+	{
+		if(getTotalAmount() < 17)
+		{
+			return true;
+		}
+		return false;
+	}
+	
+	
+	/*
 	public int dealersRule(Card dealersCard1, Card dealersCard2, Deck currDeck) {
 		int total = 0;
 		Card hitCard;
@@ -33,5 +60,6 @@ public class DealersRules {
 			return total;
 		}
 	}
+	*/
 
 }

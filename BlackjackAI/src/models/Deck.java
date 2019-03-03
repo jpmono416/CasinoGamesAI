@@ -1,12 +1,13 @@
-package blackjack;
+package models;
 
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
-import java.util.ArrayList;
-import java.util.Collections;
 
-import blackjack.Card;;
+import models.Card;
+
+import java.util.ArrayList;
+import java.util.Collections;;
 
 public class Deck {
 
@@ -102,11 +103,13 @@ public class Deck {
 		
 		
 		// Implementation of a Fisher-Yates shuffling algorithm
+		// TODO shuffle only discarded cards and append at the end of remaining
 		Collections.shuffle(remainingCards);
 		
 	}
 	
 	// Overlap method for shuffling the whole deck rather than some cards
+	// TODO shuffle full deck bringing them two together
 	public void shuffleDeck() { shuffleDeck(true); }
 	
 	/**
@@ -124,10 +127,5 @@ public class Deck {
 		Integer amountOfDecks = getRemainingCards().size() / cardsOnADeck;
 		
 		// TODO FINISH -> COMPARABLE
-	}
-	
-	private void swap()
-	{
-		
 	}
 }
