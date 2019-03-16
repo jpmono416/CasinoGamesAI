@@ -14,7 +14,18 @@ public class SimulatorFunctions {
 	private Dealer dealer = new Dealer();
 	private List<Customer> customers = new ArrayList<>();
 			
-	public void newGame()
+	
+	public void newAutoGame()
+	{
+		dealAllCards();
+		
+		// wait for player 
+		
+		drawAllDealerCards();
+		clearBoard();
+	}
+	
+	private void dealAllCards()
 	{
 		// Draw two cards for each customer, then the dealer
 		for(Customer currentCustomer : customers)
@@ -30,21 +41,28 @@ public class SimulatorFunctions {
 		 * customers but this is way more resource-effective
 		 */
 		dealer.getCards().add(deck.drawCard());
-		
-		/*
-		 * deal cards
-		 * wait for player to act
-		 * deal 2nd card to dealer
-		 * while dealer not busted and dealer < 17
-		 * 	deal new card to dealer
-		 */
 	}
+	
+	private void drawAllDealerCards()
+	{
+		while(dealer.checkNewCard())
+		{
+			dealer.getCards().add(deck.drawCard());
+		}
+	}
+	
+	
+	private void drawExtraCustomerCards(Integer customerID)
+	{
+		customers.get(customerID).addNewCard(deck.drawCard());
+	}
+	
 	
 	/*
 	 * This function clears the cards that the customers
 	 * and dealers have before starting a new game.
 	 */
-	public void clearBoard()
+	private void clearBoard()
 	{
 		
 	}

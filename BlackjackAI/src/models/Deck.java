@@ -59,12 +59,9 @@ public class Deck {
 	
 	public Card drawCard()
 	{
-		Card toBeReturned;
-		//store the card before returning it so it can be removed from deck first
-		toBeReturned = remainingCards.get(1);
-		discardedCards.add(remainingCards.remove(1));
+		discardedCards.add(remainingCards.get(0));
 		
-		return toBeReturned;
+		return remainingCards.remove(0);
 	}
 	
 	public List<Card> buildDeck()
