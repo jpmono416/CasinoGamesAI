@@ -89,25 +89,27 @@ public class Deck {
 	{
 		// Only shuffling discarded, add cards that are
 		// yet to be processed and shuffled by the machine
-		Integer countOfCards = getDiscardedCards().size() + getCardsNotShuffled();
-		
 		if(shuffleWholeDeck)
 		{
-			countOfCards = getRemainingCards().size() + getDiscardedCards().size();
+			//shuffle Whole Deck
+			remainingCards.addAll(discardedCards);
+			Collections.shuffle(remainingCards);
+			
 		}
-		// Ensure the whole deck is in place 
-		remainingCards.addAll(getDiscardedCards());
-		
-		
-		// Implementation of a Fisher-Yates shuffling algorithm
-		// TODO shuffle only discarded cards and append at the end of remaining
-		Collections.shuffle(remainingCards);
+		else {
+			//shuffle discarded cards only then add randomly into the remaining cards so discarded cards
+			//will be anywhere in the shoe
+			Collections.shuffle(discardedCards);
+			for (int i = 1 ; i  < discardedCards.size(); ) {
+				Collections.shuffle(remainingCards);
+				remainingCards.add(discardedCards.get(i));
+			}
+			Collections.shuffle(remainingCards);
+			discardedCards.clear();
+		}
 		
 	}
 	
-	// Overlap method for shuffling the whole deck rather than some cards
-	// TODO shuffle full deck bringing them two together
-	public void shuffleDeck() { shuffleDeck(true); }
 	
 	/**
 	 * Sort the whole deck and put it back into order.
