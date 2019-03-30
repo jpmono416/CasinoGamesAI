@@ -87,8 +87,7 @@ public class Deck {
 	// Method for shuffling only a few discarded cards into the deck
 	public void shuffleDeck(Boolean shuffleWholeDeck)
 	{
-		// Only shuffling discarded, add cards that are
-		// yet to be processed and shuffled by the machine
+		
 		if(shuffleWholeDeck)
 		{
 			//shuffle Whole Deck
