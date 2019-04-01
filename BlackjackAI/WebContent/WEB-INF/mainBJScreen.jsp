@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
+    
 <!DOCTYPE html>
 <html>
 
@@ -45,29 +47,30 @@
                     <h1 class="text-center">Dealer's cards</h1></div>
                 <div class="col-md-4 col-md-offset-1">
                     <div class="card">
-                        <h1 class="top-letter">K </h1>
+                        <h1 class="top-letter"><c:out value="${ sessionScope.simulatorFunctions.getDealer().getCards().get(0) }"></c:out> </h1>
                         <p class="text-center"><i class="glyphicon glyphicon-heart" style="font-size:82px;color:#800000;"></i></p>
-                        <h1 class="text-right bottom-letter">K </h1></div>
+                        <h1 class="text-right bottom-letter"><c:out value="${ sessionScope.simulatorFunctions.dealer.cards.get(0) }"></c:out> </h1></div>
                 </div>
                 <div class="col-md-4 col-md-offset-1">
                     <div class="card">
-                        <h1 class="top-letter">K </h1>
+                        <!--  <h1 class="top-letter"><c:out value="${ sessionScope.simulatorFunctions.customer.cards.get(0) }"></c:out> </h1>
                         <p class="text-center"> <i class="glyphicon glyphicon-heart" style="font-size:82px;"></i></p>
-                        <h1 class="text-right bottom-letter">K </h1></div>
+                        <h1 class="text-right bottom-letter"><c:out value="${ sessionScope.simulatorFunctions.customer.cards.get(0) }"></c:out></h1></div>  -->
+                	</div>
                 </div>
                 <div class="col-md-12" style="margin-top:50px;">
                     <h1 class="text-center">Player's cards</h1></div>
                 <div class="col-md-4 col-md-offset-1">
                     <div class="card">
-                        <h1 class="top-letter">K </h1>
+                        <h1 class="top-letter"><c:out value="${ sessionScope.simulatorFunctions.customer.cards.get(0) }"></c:out></h1>
                         <p class="text-center"> <i class="glyphicon glyphicon-heart" style="font-size:82px;"></i></p>
-                        <h1 class="text-right bottom-letter">K </h1></div>
+                        <h1 class="text-right bottom-letter"><c:out value="${ sessionScope.simulatorFunctions.customer.cards.get(0) }"></c:out> </h1></div>
                 </div>
                 <div class="col-md-4 col-md-offset-1">
                     <div class="card">
-                        <h1 class="top-letter">K </h1>
+                        <h1 class="top-letter"><c:out value="${ sessionScope.simulatorFunctions.customer.cards.get(1) }"></c:out> </h1>
                         <p class="text-center"><i class="glyphicon glyphicon-heart" style="font-size:82px;color:#800000;"></i></p>
-                        <h1 class="text-right bottom-letter">K </h1></div>
+                        <h1 class="text-right bottom-letter"><c:out value="${ sessionScope.simulatorFunctions.customer.cards.get(1) }"></c:out> </h1></div>
                 </div>
             </div>
         </div>

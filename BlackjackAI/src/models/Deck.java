@@ -51,7 +51,9 @@ public class Deck {
 		
 		while(counter <= amountOfDecks)
 		{
+			System.out.println("Creating deck " + counter); // TODO DELETE
 			getRemainingCards().addAll(buildDeck());
+			++counter;
 		}
 		 // TODO POSSIBLE IMPROVEMENT -> SAVE LIST AND JUST REPEAT
 	}
@@ -71,13 +73,15 @@ public class Deck {
 		// Suit corresponds to the numeric value of each of the suits in a deck
 		for(Integer suit = 1; suit <= 4; ++suit)
 		{
+			System.out.println("Currently doing suit: ");
 			// Generate the 13 cards for one suit and create their objects
-			List<Integer> cardList = IntStream.range(1, 13).boxed().collect(Collectors.toList());
+			List<Integer> cardList = IntStream.range(1, 14).boxed().collect(Collectors.toList());
 			for(Integer cardNumber : cardList)
 			{
 				// Create Card objects with numeric and suit values
 				Card tempCard = new Card(cardNumber, suit);
 				cardsOfDeck.add(tempCard);
+				System.out.println("\t Just added card: " + tempCard.getSuit() + "," + tempCard.getValue()); // TODO DELETE
 			}
 		}
 		
@@ -87,27 +91,14 @@ public class Deck {
 	// Method for shuffling only a few discarded cards into the deck
 	public void shuffleDeck(Boolean shuffleWholeDeck)
 	{
-		// Only shuffling discarded, add cards that are
-		// yet to be processed and shuffled by the machine
-		Integer countOfCards = getDiscardedCards().size() + getCardsNotShuffled();
 		
-		if(shuffleWholeDeck)
-		{
-			countOfCards = getRemainingCards().size() + getDiscardedCards().size();
-		}
+		if(!shuffleWholeDeck) { Collections.shuffle(discardedCards); }
+		else { Collections.shuffle(remainingCards); }
+		
 		// Ensure the whole deck is in place 
 		remainingCards.addAll(getDiscardedCards());
 		
-		
-		// Implementation of a Fisher-Yates shuffling algorithm
-		// TODO shuffle only discarded cards and append at the end of remaining
-		Collections.shuffle(remainingCards);
-		
 	}
-	
-	// Overlap method for shuffling the whole deck rather than some cards
-	// TODO shuffle full deck bringing them two together
-	public void shuffleDeck() { shuffleDeck(true); }
 	
 	/**
 	 * Sort the whole deck and put it back into order.

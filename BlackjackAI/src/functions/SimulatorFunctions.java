@@ -1,7 +1,4 @@
 package functions;
-import java.util.ArrayList;
-import java.util.List;
-
 import models.Customer;
 import models.Dealer;
 import models.Deck;
@@ -9,11 +6,46 @@ import models.Deck;
 public class SimulatorFunctions {
 
 	private Integer totalAmount = 0;
+	public Integer getTotalAmount() { 
+		return totalAmount;
+	}
+	public void setTotalAmount(Integer totalAmount) {
+		this.totalAmount = totalAmount;
+	}
+
+	private final Integer amountOfDecks = 6;
+	
 	// Create all agents that affect the game
-	private Deck deck = new Deck(6);
+	private Deck deck = new Deck(amountOfDecks);
+	public Deck getDeck() {
+		return deck;
+	}
+	public void setDeck(Deck deck) {
+		this.deck = deck;
+	}
+	
 	private Dealer dealer = new Dealer();
-	private List<Customer> customers = new ArrayList<>();
-			
+	public Dealer getDealer() {
+		return dealer;
+	}
+	public void setDealer(Dealer dealer) {
+		this.dealer = dealer;
+	}
+	
+	private Customer customer = new Customer();
+	public Customer getCustomer() {
+		return customer;
+	}
+	public void setCustomer(Customer customer) {
+		this.customer = customer;
+	}
+
+	
+	public SimulatorFunctions()
+	{
+		this.deck.shuffleDeck(true);
+		this.dealAllCards();
+	}
 	
 	public void newAutoGame()
 	{
@@ -25,25 +57,18 @@ public class SimulatorFunctions {
 		clearBoard();
 	}
 	
-	private void dealAllCards()
+	public void dealAllCards()
 	{
-		// Draw two cards for each customer, then the dealer
-		for(Customer currentCustomer : customers)
+
+		while(customer.getCards().size() < 2)
 		{
-			while(currentCustomer.getCards().size() < 2)
-			{
-				currentCustomer.getCards().add(deck.drawCard());
-			}
+			customer.getCards().add(deck.drawCard());
 		}
-		
-		/*
-		 * Usually dealer's card is dealt before 2nd card of the 
-		 * customers but this is way more resource-effective
-		 */
+
 		dealer.getCards().add(deck.drawCard());
 	}
 	
-	private void drawAllDealerCards()
+	public void drawAllDealerCards()
 	{
 		while(dealer.checkNewCard())
 		{
@@ -52,9 +77,9 @@ public class SimulatorFunctions {
 	}
 	
 	
-	private void drawExtraCustomerCards(Integer customerID)
+	public void drawExtraCustomerCards()
 	{
-		customers.get(customerID).addNewCard(deck.drawCard());
+		customer.addNewCard(deck.drawCard());
 	}
 	
 	

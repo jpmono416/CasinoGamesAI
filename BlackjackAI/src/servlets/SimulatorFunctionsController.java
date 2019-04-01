@@ -8,20 +8,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import functions.SimulatorFunctions;
-import models.Card;
 import models.Customer;
 import models.Dealer;
+
 /**
- * Servlet implementation class MainBJFunctions
+ * Servlet implementation class SimulatorFunctions
  */
-@WebServlet("/MainBJSimulator")
-public class MainBJSimulator extends HttpServlet {
+@WebServlet("/SimulatorFunctions")
+public class SimulatorFunctionsController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MainBJSimulator() {
+    public SimulatorFunctionsController() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,25 +30,32 @@ public class MainBJSimulator extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		SimulatorFunctions functs = new SimulatorFunctions();
-		Customer customer = functs.getCustomer();
-		Dealer dealer = functs.getDealer();
-		Card cCard1 = customer.getCards().get(0);
-		Card cCard2 = customer.getCards().get(1);
-		Card dCard = dealer.getCards().get(0);
+		// TODO Auto-generated method stub
+		String actionParam = request.getParameter("action");
+		SimulatorFunctions functionsObject = (SimulatorFunctions) request.getSession().getAttribute("functionsObject");
 		
-		System.out.println("Player cards: " + cCard1.getSuit() +cCard1.getValue() + ", "+ cCard2.getSuit() + cCard2.getValue()
-				+ " Dealers cards: " + dCard.getSuit() + dCard.getValue());
-		request.getSession().setAttribute("functionsObject", functs);
-		request.getRequestDispatcher("WEB-INF/mainBJScreen.jsp").forward(request, response);
 		
+		switch(actionParam)
+		{
+		// No bets taken into account so far, just draw new card
+		case "double" :	
+		case "drawCard" :
+			functionsObject.drawExtraCustomerCards();
+				
+		case "split" :
+			
+		case "stay" :
+			functionsObject.drawAllDealerCards();
+		}
+		request.getSession().setAttribute("functionsObject", functionsObject);
+	
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 
