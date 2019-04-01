@@ -97,9 +97,8 @@ public class Deck {
 		
 		// Ensure the whole deck is in place 
 		remainingCards.addAll(getDiscardedCards());
-		
 	}
-	
+
 	/**
 	 * Sort the whole deck and put it back into order.
 	 * Put any discarded cards back on the deck and execute constructor
