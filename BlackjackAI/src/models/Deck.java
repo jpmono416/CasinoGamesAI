@@ -71,19 +71,25 @@ public class Deck {
 		List<Card> cardsOfDeck = new ArrayList<Card>(52);
 		
 		// Suit corresponds to the numeric value of each of the suits in a deck
-		for(Integer suit = 1; suit <= 4; ++suit)
+		for(Integer suit = 0; suit <= 3; ++suit)
 		{
-			System.out.println("Currently doing suit: ");
+			CardSuits suitEnum = CardSuits.values()[suit];
 			// Generate the 13 cards for one suit and create their objects
-			List<Integer> cardList = IntStream.range(1, 14).boxed().collect(Collectors.toList());
+			List<Integer> cardList = IntStream.range(0, 13).boxed().collect(Collectors.toList());
 			for(Integer cardNumber : cardList)
 			{
+				CardValues cardsEnum = CardValues.values()[cardNumber];
 				// Create Card objects with numeric and suit values
-				Card tempCard = new Card(cardNumber, suit);
+				Card tempCard = new Card(cardsEnum, suitEnum);
 				cardsOfDeck.add(tempCard);
-				System.out.println("\t Just added card: " + tempCard.getSuit() + "," + tempCard.getValue()); // TODO DELETE
+				System.out.println("\t Just added card: " + tempCard.getSuit() + "," + tempCard.getValue().toString()); // TODO DELETE
 			}
 		}
+		
+		
+		
+		 
+			
 		
 		return cardsOfDeck;
 	}

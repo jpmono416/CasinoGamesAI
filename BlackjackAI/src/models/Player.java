@@ -36,12 +36,19 @@ public class Player {
 	 */
 	public void addNewCard(Card card)
 	{
-		Integer amount;
-		if(card.getValue() >= 10) 
-		{ 
-			amount = 10; 
-		} else { amount = card.getValue(); }
-			
-		totalAmount += amount;
+		// Add a new card to the total
+		switch(card.getValue().getNumericalValue())
+		{
+			case(11) :
+				// Ace plays as 11 or 1 depending on whether the player busts
+				if(totalAmount + 11 > 21)
+				{
+					totalAmount += 1;
+				} else { totalAmount += 11; }
+				break;
+			default:
+				totalAmount += card.getValue().getNumericalValue(); 
+				break;
+		}
 	}
 }
