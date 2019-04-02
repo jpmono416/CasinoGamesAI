@@ -82,7 +82,6 @@ public class Deck {
 				// Create Card objects with numeric and suit values
 				Card tempCard = new Card(cardsEnum, suitEnum);
 				cardsOfDeck.add(tempCard);
-				System.out.println("\t Just added card: " + tempCard.getSuit() + "," + tempCard.getValue().toString()); // TODO DELETE
 			}
 		}
 		
