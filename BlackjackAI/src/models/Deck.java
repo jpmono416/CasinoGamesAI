@@ -51,7 +51,6 @@ public class Deck {
 		
 		while(counter <= amountOfDecks)
 		{
-			System.out.println("Creating deck " + counter); // TODO DELETE
 			getRemainingCards().addAll(buildDeck());
 			++counter;
 		}
@@ -61,6 +60,7 @@ public class Deck {
 	
 	public Card drawCard()
 	{
+		System.out.println("Length: " + remainingCards.size());
 		discardedCards.add(remainingCards.get(0));
 		
 		return remainingCards.remove(0);
@@ -85,15 +85,9 @@ public class Deck {
 			}
 		}
 		
-		
-		
-		 
-			
-		
 		return cardsOfDeck;
 	}
 	
-	// Method for shuffling only a few discarded cards into the deck
 	public void shuffleDeck(Boolean shuffleWholeDeck)
 	{
 		

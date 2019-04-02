@@ -41,11 +41,13 @@ public class SimulatorFunctionsController extends HttpServlet {
 		case "double" :	
 		case "drawCard" :
 			functionsObject.drawExtraCustomerCards();
-				
+			request.getSession().setAttribute("cardID", functionsObject.getCustomer().getCards().size());
+			break;
 		case "split" :
 			
 		case "stay" :
 			functionsObject.drawAllDealerCards();
+			break;
 		}
 		request.getSession().setAttribute("functionsObject", functionsObject);
 	

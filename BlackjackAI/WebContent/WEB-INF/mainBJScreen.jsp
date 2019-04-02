@@ -10,10 +10,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Casino simulator</title>
     <link rel="stylesheet" href="./bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="./css/Footer-Dark.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.css">
     <link rel="stylesheet" href="./css/Navigation-Clean1.css">
-    <link rel="stylesheet" href="./css/styles.css">
+	<link rel="stylesheet" href="./css/styles.css">
+	<link rel="stylesheet" href="./css/Footer-Dark.css">    
+	<script src="./js/jquery.min.js"></script>
 </head>
 
 <body style="background:#e7e7e7;">
@@ -42,7 +43,7 @@
     </div>
     <div class="row" style="margin-top:70px;">
         <div class="col-md-7 col-md-offset-1">
-            <div class="row">
+            <div class="row" id="dealersRow">
                 <div class="col-md-12">
                     <h1 class="text-center">Dealer's cards</h1></div>
                 <div class="col-md-4 col-md-offset-1">
@@ -58,6 +59,8 @@
                         <h1 class="text-right bottom-letter"><c:out value="${ sessionScope.simulatorFunctions.customer.cards.get(0) }"></c:out></h1></div>  
                 	</div> -->
                 </div>
+            </div>
+            <div class="row" id="playersRow">
                 <div class="col-md-12" style="margin-top:50px;">
                     <h1 class="text-center">Player's cards</h1></div>
                 <div class="col-md-4 col-md-offset-1">
@@ -68,9 +71,9 @@
                 </div>
                 <div class="col-md-4 col-md-offset-1">
                     <div class="card">
-                        <h1 class="top-letter"><c:out value="${ sessionScope.functionsObject.customer.cards.get(1).getValue() }"></c:out> </h1>
-                        <p class="text-center"><i class="glyphicon glyphicon-heart" style="font-size:82px;color:#800000;"></i></p>
-                        <h1 class="text-right bottom-letter"><c:out value="${ sessionScope.functionsObject.customer.cards.get(1).getValue() }"></c:out> </h1></div>
+	                    <h1 class="top-letter"><c:out value="${ sessionScope.functionsObject.customer.cards.get(1).getValue() }"></c:out> </h1>
+	                    <p class="text-center"><i class="glyphicon glyphicon-heart" style="font-size:82px;color:#800000;"></i></p>
+	                    <h1 class="text-right bottom-letter"><c:out value="${ sessionScope.functionsObject.customer.cards.get(1).getValue() }"></c:out> </h1></div>
                 </div>
             </div>
         </div>
@@ -79,13 +82,49 @@
             <h4>Won: <span class="badge" style="float:right;">42</span></h4>
             <h4>Lost: <span class="badge" style="float:right;">42</span></h4>
             <h4>Win/loss: <span class="badge" style="float:right;">42%</span></h4>
-            <button class="btn btn-primary btn-block" type="button" style="margin-top:30px;">Next hand</button>
+            <div class="row" style="margin-bottom:0;">
+            	<div class="col-md-6">
+            		<button class="btn btn-primary btn-block" type="button" style="margin-top:30px;" id="newCardButton">Draw</button>
+            	</div>
+            	<div class="col-md-6">
+					<button class="btn btn-primary btn-block" type="button" style="margin-top:30px;" id="stayButton">Stay</button>            	
+            	</div>
+            </div>
+			<button class="btn btn-primary btn-block" type="button" style="margin-top:30px;" id="nextHandButton">Next hand</button>
+			
+            
         </div>
+        
     </div>
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/bootstrap/js/bootstrap.min.js"></script>
-    <script src="assets/js/bs-animation.js"></script>
+    
+    
+    <script src="./bootstrap/js/bootstrap.min.js"></script>
+    <script src="./js/bs-animation.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+
+	$(document).ready(function(){
+		alert('Function');
+	 	$("#newCardButton").click(function(){
+	 		alert('Started process'); //TODO DELETE
+	 		$.ajax({url: "./SimulatorFunctions?action=drawCard", 
+				success: function(){
+					$('#playersCards').append('<div class="col-md-4 col-md-offset-1">'+
+	                    '<div class="card">'+
+	                    '<h1 class="top-letter"><c:out value="${ sessionScope.functionsObject.getDealer().getCards().get(0).getValue() }"></c:out> </h1>'+
+	                    '<p class="text-center"><i class="glyphicon glyphicon-heart" style="font-size:82px;color:#800000;"></i></p>'+
+	                	'<h1 class="text-right bottom-letter"><c:out value="${ sessionScope.functionsObject.customer.cards.get(sessionScope.cardID).getValue() }"></c:out> </h1></div>'+
+	            	'</div>'
+	    		);
+			}});
+	 	});
+	});
+	
+	function drawCardAJAX(){
+		
+	}
+	</script>
 </body>
 
 </html>
