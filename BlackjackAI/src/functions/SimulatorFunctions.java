@@ -86,39 +86,7 @@ public class SimulatorFunctions {
 			drawExtraDealerCards();
 		}
 	}
-	
-	
-	public String buildDealerJSON()
-	{
-		List<String> cardValues = new ArrayList<>();
-		
-		for(Card card : dealer.getCards())
-		{
-			cardValues.add(card.getValue().toString());
-		}
 
-		System.out.println("List: " + cardValues.toString());
-		// Remove the first card because it is already in the board
-		cardValues.remove(0);
-		System.out.println("List updated: " + cardValues.toString());
-
-		return "{ \"cardValue\" : " + cardValues.toString() + ", "
-				+ " \"busted\" : " + dealer.checkBusted() + ", "
-				+ " \"totalAmount\" : " + customer.getTotalAmount() + " }";
- 	}
-	
-	/*
-	 * This function is used on the AJAX request to draw a new card from the page.
-	 * It creates the final JSON string which will be sent back in the response
-	 */
-	public String buildCustomerJSON()
-	{
-		
-		return "{ \"cardValues\" : \"" + customer.getCards().get(dealer.getCards().size() - 1).getValue() + "\", "
-				+ " \"busted\" : " + customer.checkBusted() + ", "
-						+ " \"totalAmount\" : " + customer.getTotalAmount() +  " }";
-	}
-	
 	public void drawExtraDealerCards()
 	{
 		dealer.addNewCard(deck.drawCard());

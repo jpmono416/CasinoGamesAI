@@ -2,12 +2,14 @@ package servlets;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import functions.SimulatorFunctions;
 import models.Card;
@@ -34,7 +36,10 @@ public class SimulatorFunctionsController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		String actionParam = request.getParameter("action");
+		Map<String, String[]> reqParams = request.getParameterMap();
+		
+		
+		String actionParam = reqParams.get("action")[0];
 		SimulatorFunctions functionsObject = (SimulatorFunctions) request.getSession().getAttribute("functionsObject");
 		String jsonString;
 		
@@ -45,7 +50,6 @@ public class SimulatorFunctionsController extends HttpServlet {
 		case "drawCard" :
 			functionsObject.drawExtraCustomerCards();
 			jsonString = functionsObject.generateJSON(functionsObject.getCustomer());
-			System.out.println("Customers JSON: " + jsonString);
 			response.getWriter().write(jsonString);
 			
 			break;
@@ -54,8 +58,19 @@ public class SimulatorFunctionsController extends HttpServlet {
 		case "stay" :
 			functionsObject.drawAllDealerCards();
 			jsonString = functionsObject.generateJSON(functionsObject.getDealer());
-			System.out.println("Dealers JSON : " + jsonString);
 			response.getWriter().write(jsonString);
+			break;
+		case "updateStats" :
+			HttpSession session = request.getSession();
+			
+			System.out.println("P: " + reqParams.get("played")[0] + "/ W: " + reqParams.get("won")[0] 
+					+ "/ L: " + reqParams.get("lost")[0] + "/ wl: " + reqParams.get("wl")[0]);
+			
+			session.setAttribute("handsPlayed", reqParams.get("played")[0]);
+			session.setAttribute("handsWon", reqParams.get("won")[0]);
+			session.setAttribute("handsLost", reqParams.get("lost")[0]);
+			session.setAttribute("WLRatio", reqParams.get("wl")[0]);
+			System.out.println("All updated"); 
 			break;
 		}
 		request.getSession().setAttribute("functionsObject", functionsObject);

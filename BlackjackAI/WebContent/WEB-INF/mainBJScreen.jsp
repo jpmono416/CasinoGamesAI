@@ -149,10 +149,10 @@
             </div>
         </div>
         <div class="col-md-2">
-            <h4>Hands: <span class="badge" style="float:right;">42</span></h4>
-            <h4>Won: <span class="badge" style="float:right;">42</span></h4>
-            <h4>Lost: <span class="badge" style="float:right;">42</span></h4>
-            <h4>Win/loss: <span class="badge" style="float:right;">42%</span></h4>
+            <h4>Hands: <span class="badge" style="float:right;" id="handsPlayed"><c:out value="${ sessionScope.handsPlayed }"></c:out></span></h4>
+            <h4>Won: <span class="badge" style="float:right;" id="handsWon"><c:out value="${ sessionScope.handsWon }"></c:out></span></h4>
+            <h4>Lost: <span class="badge" style="float:right;" id="handsLost"><c:out value="${ sessionScope.handsLost }"></c:out></span></h4>
+            <h4>Win ratio: <span class="badge" style="float:right;" id="WLRatio"><c:out value="${ sessionScope.WLRatio }"></c:out>%</span></h4>
             <div class="row" style="margin-bottom:0;">
             	<div class="col-md-6">
             		<button class="btn btn-primary btn-block" type="button" style="margin-top:30px;" id="newCardButton">Draw</button>
@@ -169,10 +169,7 @@
     </div>
     
     
-    <script src="./bootstrap/js/bootstrap.min.js"></script>
-    <script src="./js/bs-animation.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    
     <script>
 
 	$(document).ready(function(){
@@ -180,8 +177,7 @@
 	 		$.ajax({
 	 			url: "./SimulatorFunctions?action=drawCard", 
 				success: function(data){
-					console.log(data);
-					debugger;
+
 					var customerJson = JSON.parse(data);
 					const cNumericValue = customerJson.cards[customerJson.cards.length - 1].value.cardValue;
 					var suitImageSource = "";
@@ -215,7 +211,7 @@
 	            	$('#customerTotalAmount').text(customerJson.totalAmount);
 					if(customerJson.busted == true)
 					{
-						$('newCardButton').prop('disabled', true);
+						$('#newCardButton').prop('disabled', true);
 					}
 			}});
 	 	});
@@ -262,15 +258,16 @@
 					}
 					
 	            	$('#dealerTotalAmount').text(dealerJson.totalAmount);
-					if(dealerJson.busted == true)
-					{
-						alert('You win!');
-					}
+					finishHand();
 				}
 			});
 		});
 	});
 	</script>
+	<script src="./bootstrap/js/bootstrap.min.js"></script>
+    <script src="./js/bs-animation.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.1.1/aos.js"></script>
+    <script src="./js/sim-stats-functions.js"></script>
 </body>
 
 </html>

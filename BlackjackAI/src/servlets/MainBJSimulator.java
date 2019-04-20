@@ -6,6 +6,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import functions.SimulatorFunctions;
 import models.Card;
@@ -32,8 +33,30 @@ public class MainBJSimulator extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		SimulatorFunctions functs = new SimulatorFunctions();
+		HttpSession session = request.getSession();
+		session.setAttribute("functionsObject", functs);
+		
+		if(session.getAttribute("handsPlayed") == null)
+		{
+			session.setAttribute("handsPlayed", 0);
 
-		request.getSession().setAttribute("functionsObject", functs);
+		}
+		if(session.getAttribute("handsWon") == null)
+		{
+			session.setAttribute("handsWon", 0);
+
+		}
+		if(session.getAttribute("handsLost") == null)
+		{
+			session.setAttribute("handsLost", 0);
+
+		}
+		if(session.getAttribute("WLRatio") == null)
+		{
+			session.setAttribute("WLRatio", 0);
+
+		}
+		
 		request.getRequestDispatcher("WEB-INF/mainBJScreen.jsp").forward(request, response);
 		
 	}
