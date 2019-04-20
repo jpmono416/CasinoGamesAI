@@ -32,14 +32,7 @@ public class MainBJSimulator extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		SimulatorFunctions functs = new SimulatorFunctions();
-		Customer customer = functs.getCustomer();
-		Dealer dealer = functs.getDealer();
-		Card cCard1 = customer.getCards().get(0);
-		Card cCard2 = customer.getCards().get(1);
-		Card dCard = dealer.getCards().get(0);
-		
-		System.out.println("Player cards: " + cCard1.getSuit() +cCard1.getValue() + ", "+ cCard2.getSuit() + cCard2.getValue()
-				+ " Dealers cards: " + dCard.getSuit() + dCard.getValue());
+
 		request.getSession().setAttribute("functionsObject", functs);
 		request.getRequestDispatcher("WEB-INF/mainBJScreen.jsp").forward(request, response);
 		

@@ -60,7 +60,6 @@ public class Deck {
 	
 	public Card drawCard()
 	{
-		System.out.println("Length: " + remainingCards.size());
 		discardedCards.add(remainingCards.get(0));
 		
 		return remainingCards.remove(0);

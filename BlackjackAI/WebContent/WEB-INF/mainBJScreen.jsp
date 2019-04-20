@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c" %>
     
 <!DOCTYPE html>
@@ -45,11 +45,36 @@
         <div class="col-md-7 col-md-offset-1">
             <div class="row" id="dealersRow">
                 <div class="col-md-12">
-                    <h1 class="text-center">Dealer's cards</h1></div>
+                    <h1 class="text-center">Dealer's cards
+                    	<span id="dealerTotalAmount" class="badge">
+                    		<c:out value="${ sessionScope.functionsObject.getDealer().getTotalAmount() }"></c:out>
+                    	</span>
+                    </h1></div>
                 <div class="col-md-4 col-md-offset-1">
                     <div class="card">
                         <h1 class="top-letter"><c:out value="${ sessionScope.functionsObject.getDealer().getCards().get(0).getValue() }"></c:out> </h1>
-                        <p class="text-center"><i class="glyphicon glyphicon-heart" style="font-size:82px;color:#800000;"></i></p>
+                        <c:choose>
+                        	<c:when test="${ sessionScope.functionsObject.getDealer().getCards().get(0).getSuit() == 'SPADES'}">
+                        		<div class="centerImg">
+                        			<img src="./img/SpadesImg.png" class="centerImage">
+                        		</div>
+                        	</c:when>
+                        	<c:when test="${ sessionScope.functionsObject.getDealer().getCards().get(0).getSuit() == 'HEARTS'}">
+                        		<div class="centerImg">
+                        			<img src="./img/HeartsImg.png" class="centerImage">
+                        		</div>
+                        	</c:when>
+                        	<c:when test="${ sessionScope.functionsObject.getDealer().getCards().get(0).getSuit() == 'CLUBS'}">
+                        		<div class="centerImg">
+                        			<img src="./img/ClubsImg.png" class="centerImage">
+                        		</div>
+                        	</c:when>
+                        	<c:when test="${ sessionScope.functionsObject.getDealer().getCards().get(0).getSuit() == 'DIAMONDS'}">
+                        		<div class="centerImg">
+                        			<img src="./img/DiamondsImg.png" class="centerImage">
+                        		</div>
+                        	</c:when>
+                        </c:choose>
                         <h1 class="text-right bottom-letter"><c:out value="${ sessionScope.functionsObject.dealer.cards.get(0).getValue() }"></c:out> </h1></div>
                 </div>
                 <div class="col-md-4 col-md-offset-1">
@@ -62,18 +87,64 @@
             </div>
             <div class="row" id="playersRow">
                 <div class="col-md-12" style="margin-top:50px;">
-                    <h1 class="text-center">Player's cards</h1></div>
+                    <h1 class="text-center">Player's cards
+                    	<span id="customerTotalAmount" class="badge">
+                    		<c:out value="${ sessionScope.functionsObject.getCustomer().getTotalAmount() }"></c:out>
+                    	</span>
+                    </h1></div>
                 <div class="col-md-4 col-md-offset-1">
                     <div class="card">
-                        <h1 class="top-letter"><c:out value="${ sessionScope.functionsObject.customer.cards.get(0).getValue() }"></c:out></h1>
-                        <p class="text-center"> <i class="glyphicon glyphicon-heart" style="font-size:82px;"></i></p>
-                        <h1 class="text-right bottom-letter"><c:out value="${ sessionScope.functionsObject.customer.cards.get(0).getValue() }"></c:out> </h1></div>
+                        <h1 class="top-letter"><c:out value="${ sessionScope.functionsObject.getCustomer().getCards().get(0).getValue() }"></c:out></h1>
+							<c:choose>
+	                        	<c:when test="${ sessionScope.functionsObject.getCustomer().getCards().get(0).getSuit() == 'SPADES'}">
+	                        		<div class="centerImg">
+	                        			<img src="./img/SpadesImg.png" class="centerImage">
+	                        		</div>
+	                        	</c:when>
+	                        	<c:when test="${ sessionScope.functionsObject.getCustomer().getCards().get(0).getSuit() == 'HEARTS'}">
+	                        		<div class="centerImg">
+	                        			<img src="./img/HeartsImg.png" class="centerImage">
+	                        		</div>
+	                        	</c:when>
+	                        	<c:when test="${ sessionScope.functionsObject.getCustomer().getCards().get(0).getSuit() == 'CLUBS'}">
+	                        		<div class="centerImg">
+	                        			<img src="./img/ClubsImg.png" class="centerImage">
+	                        		</div>
+	                        	</c:when>
+	                        	<c:when test="${ sessionScope.functionsObject.getCustomer().getCards().get(0).getSuit() == 'DIAMONDS'}">
+	                        		<div class="centerImg">
+	                        			<img src="./img/DiamondsImg.png" class="centerImage">
+	                        		</div>
+	                        	</c:when>
+	                        </c:choose>
+                        <h1 class="text-right bottom-letter"><c:out value="${ sessionScope.functionsObject.getCustomer().getCards().get(0).getValue() }"></c:out> </h1></div>
                 </div>
                 <div class="col-md-4 col-md-offset-1">
                     <div class="card">
-	                    <h1 class="top-letter"><c:out value="${ sessionScope.functionsObject.customer.cards.get(1).getValue() }"></c:out> </h1>
-	                    <p class="text-center"><i class="glyphicon glyphicon-heart" style="font-size:82px;color:#800000;"></i></p>
-	                    <h1 class="text-right bottom-letter"><c:out value="${ sessionScope.functionsObject.customer.cards.get(1).getValue() }"></c:out> </h1></div>
+	                    <h1 class="top-letter"><c:out value="${ sessionScope.functionsObject.getCustomer().getCards().get(1).getValue() }"></c:out> </h1>
+	                    <c:choose>
+                        	<c:when test="${ sessionScope.functionsObject.getCustomer().getCards().get(0).getSuit() == 'SPADES'}">
+                        		<div class="centerImg">
+                        			<img src="./img/SpadesImg.png" class="centerImage">
+                        		</div>
+                        	</c:when>
+                        	<c:when test="${ sessionScope.functionsObject.getCustomer().getCards().get(0).getSuit() == 'HEARTS'}">
+                        		<div class="centerImg">
+                        			<img src="./img/HeartsImg.png" class="centerImage">
+                        		</div>
+                        	</c:when>
+                        	<c:when test="${ sessionScope.functionsObject.getCustomer().getCards().get(0).getSuit() == 'CLUBS'}">
+                        		<div class="centerImg">
+                        			<img src="./img/ClubsImg.png" class="centerImage">
+                        		</div>
+                        	</c:when>
+                        	<c:when test="${ sessionScope.functionsObject.getCustomer().getCards().get(0).getSuit() == 'DIAMONDS'}">
+                        		<div class="centerImg">
+                        			<img src="./img/DiamondsImg.png" class="centerImage">
+                        		</div>
+                        	</c:when>
+                        </c:choose>
+	                    <h1 class="text-right bottom-letter"><c:out value="${ sessionScope.functionsObject.getCustomer().getCards().get(1).getValue() }"></c:out> </h1></div>
                 </div>
             </div>
         </div>
@@ -105,25 +176,100 @@
     <script>
 
 	$(document).ready(function(){
-		alert('Function');
 	 	$("#newCardButton").click(function(){
-	 		alert('Started process'); //TODO DELETE
-	 		$.ajax({url: "./SimulatorFunctions?action=drawCard", 
-				success: function(){
-					$('#playersCards').append('<div class="col-md-4 col-md-offset-1">'+
+	 		$.ajax({
+	 			url: "./SimulatorFunctions?action=drawCard", 
+				success: function(data){
+					console.log(data);
+					debugger;
+					var customerJson = JSON.parse(data);
+					const cNumericValue = customerJson.cards[customerJson.cards.length - 1].value.cardValue;
+					var suitImageSource = "";
+					switch(customerJson.cards[customerJson.cards.length - 1].suit)
+					{
+						case "DIAMONDS" :
+							suitImageSource = "./img/DiamondsImg.png";
+							break;
+							
+						case "SPADES" :
+							suitImageSource = "./img/SpadesImg.png";
+							break;
+							
+						case "HEARTS" : 
+							suitImageSource = "./img/HeartsImg.png";
+							break;
+							
+						case "CLUBS" : 
+							suitImageSource = "./img/ClubsImg.png";
+							break;
+					}
+					$('#playersRow').append('<div class="col-md-4 col-md-offset-1">'+
 	                    '<div class="card">'+
-	                    '<h1 class="top-letter"><c:out value="${ sessionScope.functionsObject.getDealer().getCards().get(0).getValue() }"></c:out> </h1>'+
-	                    '<p class="text-center"><i class="glyphicon glyphicon-heart" style="font-size:82px;color:#800000;"></i></p>'+
-	                	'<h1 class="text-right bottom-letter"><c:out value="${ sessionScope.functionsObject.customer.cards.get(sessionScope.cardID).getValue() }"></c:out> </h1></div>'+
-	            	'</div>'
-	    		);
+	                    '<h1 class="top-letter">' + cNumericValue + '</h1>'+
+	                    '<div class="centerImg">' +
+                        	'<img src="' + suitImageSource + '" class="centerImage">' + 
+                        '</div>'+
+	                	'<h1 class="text-right bottom-letter">' + cNumericValue + '</h1></div>'+
+	            	'</div>')
+					
+	            	$('#customerTotalAmount').text(customerJson.totalAmount);
+					if(customerJson.busted == true)
+					{
+						$('newCardButton').prop('disabled', true);
+					}
 			}});
 	 	});
 	});
 	
-	function drawCardAJAX(){
-		
-	}
+	
+	$(document).ready(function(){
+		$("#stayButton").click(function(){
+			$.ajax({
+				url: "./SimulatorFunctions?action=stay",
+				success: function(data){
+					var dealerJson = JSON.parse(data);
+					
+					var suitImageSource = "";
+					for(var counter = 1; counter < dealerJson.cards.length; ++counter)
+					{
+						switch(dealerJson.cards[counter].suit)
+						{
+							case "DIAMONDS" :
+								suitImageSource = "./img/DiamondsImg.png";
+								break;
+								
+							case "SPADES" :
+								suitImageSource = "./img/SpadesImg.png";
+								break;
+								
+							case "HEARTS" : 
+								suitImageSource = "./img/HeartsImg.png";
+								break;
+								
+							case "CLUBS" : 
+								suitImageSource = "./img/ClubsImg.png";
+								break;
+						}
+						const dNumericValue = dealerJson.cards[counter].value.cardValue;
+						$('#dealersRow').append('<div class="col-md-4 col-md-offset-1">'+
+		                    	'<div class="card">'+
+			                    '<h1 class="top-letter">' + dNumericValue + '</h1>'+
+			                    '<div class="centerImg">' +
+	                        		'<img src="' + suitImageSource + '" class="centerImage">' + 
+	                        	'</div>'+
+			                	'<h1 class="text-right bottom-letter">' + dNumericValue + '</h1></div>'+
+			            	'</div>')
+					}
+					
+	            	$('#dealerTotalAmount').text(dealerJson.totalAmount);
+					if(dealerJson.busted == true)
+					{
+						alert('You win!');
+					}
+				}
+			});
+		});
+	});
 	</script>
 </body>
 

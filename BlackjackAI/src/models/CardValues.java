@@ -1,5 +1,8 @@
 package models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+@JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public enum CardValues {
 
 	ACE(11, "A"),
@@ -18,6 +21,11 @@ public enum CardValues {
 	;
 	
 	private final String cardValue;
+	public String getCardValue() {
+		return cardValue;
+	}
+
+
 	@Override
 	public String toString()
 	{

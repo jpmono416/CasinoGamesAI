@@ -1,0 +1,12 @@
+.centerImg
+{
+	width: 100%;
+    height: 80px;
+}
+
+.centerImage
+{
+	display: block;
+	margin: 0 auto;
+	height: 100%
+}

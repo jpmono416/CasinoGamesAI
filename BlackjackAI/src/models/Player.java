@@ -21,11 +21,18 @@ public class Player {
 		this.cards = cards;
 	}
 
-	
+	Boolean busted = false;
+	public Boolean getBusted() {
+		return busted;
+	}
+	public void setBusted(Boolean busted) {
+		this.busted = busted;
+	}
 	public Boolean checkBusted()
 	{
 		if(getTotalAmount() > 21)
 		{
+			busted = true;
 			return true;
 		}
 		return false;
@@ -50,5 +57,6 @@ public class Player {
 				totalAmount += card.getValue().getNumericalValue(); 
 				break;
 		}
+		cards.add(card);
 	}
 }

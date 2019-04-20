@@ -1,6 +1,8 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -8,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import functions.SimulatorFunctions;
+import models.Card;
 import models.Customer;
 import models.Dealer;
 
@@ -33,7 +36,7 @@ public class SimulatorFunctionsController extends HttpServlet {
 		// TODO Auto-generated method stub
 		String actionParam = request.getParameter("action");
 		SimulatorFunctions functionsObject = (SimulatorFunctions) request.getSession().getAttribute("functionsObject");
-		
+		String jsonString;
 		
 		switch(actionParam)
 		{
@@ -41,16 +44,21 @@ public class SimulatorFunctionsController extends HttpServlet {
 		case "double" :	
 		case "drawCard" :
 			functionsObject.drawExtraCustomerCards();
-			request.getSession().setAttribute("cardID", functionsObject.getCustomer().getCards().size());
+			jsonString = functionsObject.generateJSON(functionsObject.getCustomer());
+			System.out.println("Customers JSON: " + jsonString);
+			response.getWriter().write(jsonString);
+			
 			break;
 		case "split" :
 			
 		case "stay" :
 			functionsObject.drawAllDealerCards();
+			jsonString = functionsObject.generateJSON(functionsObject.getDealer());
+			System.out.println("Dealers JSON : " + jsonString);
+			response.getWriter().write(jsonString);
 			break;
 		}
 		request.getSession().setAttribute("functionsObject", functionsObject);
-	
 	}
 
 	/**

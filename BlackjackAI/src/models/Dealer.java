@@ -1,17 +1,13 @@
 package models;
 
 public class Dealer extends Player{
-	private Integer totalAmount = 0;
-	public Integer getTotalAmount() { 
-		return totalAmount;
-	}
-
 	/*
 	 * This method checks the dealer has less than 16 in order to
 	 * get a new card or not
 	 */
 	public Boolean checkNewCard()
 	{
+		System.out.println("Dealers amoutn: " + getTotalAmount());
 		if(getTotalAmount() < 17)
 		{
 			return true;
