@@ -14,8 +14,6 @@ $(document).ready(function(){
 function finishHand()
 {
 	checkWinner();
-	alert('Played/won: ' + handsPlayed + ' ' + handsWon);
-	alert('Lost/WL: ' + handsLost + ' ' + WLRatio);
 	updateScores();
 	updScoresSession();
 }
@@ -24,11 +22,8 @@ function checkWinner()
 {
 	const playerCaret = $('#customerTotalAmount');
 	const dealerCaret = $('#dealerTotalAmount');
-	console.log(playerCaret);
-	console.log(dealerCaret);
 	const customerAmount = playerCaret.text();
 	const dealerAmount = dealerCaret.text();
-	alert('dealer and player: ' + dealerAmount + ' ' + customerAmount);
 	
 	if(customerAmount <= 21 && customerAmount > dealerAmount || customerAmount <= 21 && dealerAmount > 21)
 	{
