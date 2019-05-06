@@ -1,7 +1,17 @@
 package models;
 
+
+/*
+ * Class created by Harry Clarkson
+ */
 public class Neural {
 	
+	private double player, dealer, pre_tan = 0;
+	
+	//w1 = player weight, w2 = dealer, weight b = bias
+	private static double b = Math.random()*.2-.1;
+	private static double w1 = Math.random()*.2-.1;
+	private static double w2 = Math.random()*.2-.1;
 	
 	//number returned if > 0.5 then hit
 	public double prediction(double m1, double m2) {
@@ -37,13 +47,7 @@ public class Neural {
 		return (1/(1+ Math.pow(Math.E,(-1*x))));
 	}
 	
-	private double player, dealer, pre_tan = 0;
 	
-	
-	//w1 = player weight, w2 = dealer, weight b = bias
-	private static double b = Math.random()*.2-.1;
-	private static double w1 = Math.random()*.2-.1;
-	private static double w2 = Math.random()*.2-.1;
 	
 
 }

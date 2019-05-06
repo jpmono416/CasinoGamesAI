@@ -1,18 +1,13 @@
 package functions;
 import java.util.ArrayList;
-import java.util.List;
 
-import models.Card;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import models.Customer;
 import models.Dealer;
 import models.Deck;
 import models.Player;
-
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.DeserializationFeature;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.node.ArrayNode;
 
 public class SimulatorFunctions {
 
@@ -77,6 +72,7 @@ public class SimulatorFunctions {
 		}
 
 		drawExtraDealerCards();
+		
 	}
 	
 	public void drawAllDealerCards()
@@ -102,8 +98,10 @@ public class SimulatorFunctions {
 	 * This function clears the cards that the customers
 	 * and dealers have before starting a new game.
 	 */
-	private void clearBoard()
+	public void clearBoard()
 	{
+		customer = new Customer();
+		dealer = new Dealer();
 		
 	}
 	

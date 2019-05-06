@@ -62,6 +62,11 @@ public class Deck {
 	{
 		discardedCards.add(remainingCards.get(0));
 		
+		// Put discarded shuffled back into the deck
+		if(discardedCards.size() >= 20)
+		{
+			this.shuffleDeck(false);
+		}
 		return remainingCards.remove(0);
 	}
 	
