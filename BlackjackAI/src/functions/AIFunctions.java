@@ -165,15 +165,25 @@ public class AIFunctions {
 		
 		// Save stats for populating the table on the interface
 		Map<Integer, Boolean> tempMap = new HashMap<>();
-		tempMap.put(this.customerStartingAmount, winOrLose);
-		System.out.println("updating value: " + dealerStartingAmount + "of the map, adding: " +  tempMap.get(customerStartingAmount));
+		tempMap.put(this.dealerStartingAmount, winOrLose);
+		System.out.println("updating value: " + customerStartingAmount + "of the map, adding: " +  tempMap.get(dealerStartingAmount));
 		List<Map<Integer,Boolean>> tempList = new ArrayList<>();
 		tempList.add(tempMap);
 		
-		if(this.stats.get(dealerStartingAmount) != null)
+		if(this.stats.get(customerStartingAmount) != null)
 		{
-			this.stats.get(dealerStartingAmount).add(tempMap);	
-		} else { this.stats.put(dealerStartingAmount, tempList); }
+			try
+			{
+				if(this.stats.get(customerStartingAmount).get(dealerStartingAmount) != null)
+				{
+					this.stats.get(customerStartingAmount).get(dealerStartingAmount).putAll(tempMap);
+				}
+			} catch (Exception e)
+			{
+				this.stats.get(customerStartingAmount).add(tempMap); 
+			}
+			
+		} else { this.stats.put(customerStartingAmount, tempList); }
 		
 		
 		this.aiObject.train(winOrLoseNumeric);

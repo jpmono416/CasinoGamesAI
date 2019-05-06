@@ -26,16 +26,8 @@
                 </div>
                 <div class="collapse navbar-collapse" id="navcol-1">
                     <ul class="nav navbar-nav navbar-right">
-                        <li class="active" role="presentation"><a href="#">Blackjack simulator</a></li>
-                        <li role="presentation"><a href="#">Statistics </a></li>
-                        <li role="presentation"><a href="#">Report </a></li>
-                        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" href="#">Choose game<span class="caret"></span></a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li role="presentation"><a href="#">Blackjack </a></li>
-                                <li role="presentation"><a href="#">Roulette </a></li>
-                                <li role="presentation"><a href="#">Poker </a></li>
-                            </ul>
-                        </li>
+                        <li role="presentation"><a href="./MainBJSimulator">Blackjack simulator</a></li>
+                        <li role="presentation"><a href="./AIFunctions?action=none">AI </a></li>
                     </ul>
                 </div>
             </div>
@@ -61,79 +53,7 @@
                             <th>10 </th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <tr>
-                            <td style="font-weight: bold;">4 </td>
-                            
-                        </tr>
-                        <tr>
-                            <td style="font-weight: bold;">5 </td>
-                            
-                        </tr>
-                        <tr>
-                            <td>6 </td>
-                            
-                        </tr>
-                        <tr>
-                            <td>7 </td>
-                            
-                        </tr>
-                        <tr>
-                            <td>8 </td>
-                            
-                        </tr>
-                        <tr>
-                            <td>9 </td>
-                            
-                        </tr>
-                        <tr>
-                            <td>10 </td>
-                            
-                        </tr>
-                        <tr>
-                            <td>11 </td>
-                            
-                        </tr>
-                        <tr>
-                            <td>12 </td>
-                            
-                        </tr>
-                        <tr>
-                            <td>13 </td>
-                            
-                        </tr>
-                        <tr>
-                            <td>14 </td>
-                            
-                        </tr>
-                        <tr>
-                            <td>15 </td>
-                            
-                        </tr>
-                        <tr>
-                            <td>16 </td>
-                            
-                        </tr>
-                        <tr>
-                            <td>17 </td>
-                            
-                        </tr>
-                        <tr>
-                            <td>18 </td>
-                            
-                        </tr>
-                        <tr>
-                            <td>19 </td>
-                            
-                        </tr>
-                        <tr>
-                            <td>20 </td>
-                            
-                        </tr>
-                        <tr>
-                            <td>21 </td>
-                            
-                        </tr>
+                    <tbody id="table">
                     </tbody>
                 </table>
             </div>
@@ -141,8 +61,8 @@
         <div class="col-md-2">
             <h3>Select the amount of hands to play</h3>
             <form>
-                <input class="form-control" type="number" placeholder="Amount" min="1000" max="100000" step="1000">
-                <button class="btn btn-primary btn-block" type="button" style="margin-top:30px;">Play </button>
+                <input id="amount" class="form-control" type="number" placeholder="Amount" min="1000" max="100000" step="1000">
+                <button id="playButton" class="btn btn-primary btn-block" type="button" style="margin-top:30px;">Play </button>
                 <hr style="height:5px;width:136px;background-color:rgba(169,108,247,0.43);">
             </form>
             <h4>Hands: <span class="badge" style="float:right;">42</span></h4>
@@ -150,6 +70,26 @@
             <h4>Lost: <span class="badge" style="float:right;">42</span></h4>
             <h4>Win/loss: <span class="badge" style="float:right;">42%</span></h4></div>
     </div>
+    <script>
+    	$(document).ready(function(){
+    		$("#playButton").click(function(){
+    			$.ajax({
+    				url: "./AIFunctions?action=autoGame&amountOfHands=" + $("#amount").val(),
+    				success: function(data){
+    					var jsonString = JSON.parse(data);
+    					var stats = jsonString.stats;
+    					
+    					$.each(stats, function(key, val){
+    						$("#table").append('<tr><td style="font-weight: bold;">' + key + '</td>');
+    						$.each(stats.key, function(key, val){
+    							$("#table").append('<td>' + val + '</td>');
+    						});
+    					});
+    				}
+    			});
+    		});
+    	});
+    </script>
     <script src="/js/jquery-1.12.4.min.js"></script>
     <script src="/bootstrap/js/bootstrap.min.js"></script>
     <script src="/bs-animation.js"></script>

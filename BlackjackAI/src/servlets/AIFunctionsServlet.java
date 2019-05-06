@@ -19,7 +19,7 @@ import functions.SimulatorFunctions;
 /**
  * Servlet implementation class AIFunctionsServlet
  */
-@WebServlet("/AIFunctionsServlet")
+@WebServlet("/AIFunctions")
 public class AIFunctionsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -64,6 +64,7 @@ public class AIFunctionsServlet extends HttpServlet {
 				break;
 				
 				default : 
+					request.getRequestDispatcher("WEB-INF/aiScreen.jsp").forward(request, response);
 					break;
 		}
 	}

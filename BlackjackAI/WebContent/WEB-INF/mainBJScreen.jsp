@@ -26,16 +26,8 @@
                 </div>
                 <div class="collapse navbar-collapse" id="navcol-1">
                     <ul class="nav navbar-nav navbar-right">
-                        <li class="active" role="presentation"><a href="#">Blackjack simulator</a></li>
-                        <li role="presentation"><a href="#">Statistics </a></li>
-                        <li role="presentation"><a href="#">Report </a></li>
-                        <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false" href="#">Choose game<span class="caret"></span></a>
-                            <ul class="dropdown-menu" role="menu">
-                                <li role="presentation"><a href="#">Blackjack </a></li>
-                                <li role="presentation"><a href="#">Roulette </a></li>
-                                <li role="presentation"><a href="#">Poker </a></li>
-                            </ul>
-                        </li>
+                        <li role="presentation"><a href="./MainBJSimulator">Blackjack simulator</a></li>
+                        <li role="presentation"><a href="./AIFunctions?action=none">AI </a></li>
                     </ul>
                 </div>
             </div>
