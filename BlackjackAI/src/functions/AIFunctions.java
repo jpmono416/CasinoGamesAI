@@ -1,6 +1,8 @@
 package functions;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -18,11 +20,11 @@ public class AIFunctions {
 		this.amountOfHands = amountOfHands;
 	}
 
-	private Map<Integer,Map<Integer,Boolean>> stats = new HashMap<>();
-	public Map<Integer, Map<Integer, Boolean>> getStats() {
+	private Map<Integer,List<Map<Integer,Boolean>>> stats = new HashMap<>();
+	public Map<Integer, List<Map<Integer, Boolean>>> getStats() {
 		return stats;
 	}
-	public void setStats(Map<Integer, Map<Integer, Boolean>> stats) {
+	public void setStats(Map<Integer, List<Map<Integer, Boolean>>> stats) {
 		this.stats = stats;
 	}
 
@@ -143,9 +145,10 @@ public class AIFunctions {
 				System.out.println("		Prediction NOT right: " + prediction); // TODO DELETE
 				break;
 			}
-			System.out.println("Finishing hand. Cards: " + this.simFuncts.getDealer().getTotalAmount() + " // " + this.simFuncts.getCustomer().getTotalAmount()); // TODO DELETE
 			// If customer didn't bust but doesn't hit any more cards
 			if(carryOn) { this.simFuncts.drawAllDealerCards(); }
+			System.out.println("Finishing hand. Cards: " + this.simFuncts.getDealer().getTotalAmount() + " // " + this.simFuncts.getCustomer().getTotalAmount()); // TODO DELETE
+			
 			this.updateStats();
 			++counter;
 		}
@@ -153,18 +156,24 @@ public class AIFunctions {
 	
 	private void updateStats()
 	{
-		// Save stats for populating the table on the interface
-		Map<Integer, Boolean> tempMap = new HashMap<>();
-		tempMap.put(this.customerStartingAmount, true);
-		System.out.println("updating value: " + dealerStartingAmount + "of the map, adding: " +  tempMap.get(customerStartingAmount));
-		this.stats.put(this.dealerStartingAmount, tempMap);
-		
 		// Save the final decision about whether the AI performed well on the hand
 		Integer winOrLoseNumeric = 
 				!this.simFuncts.getCustomer().checkBusted()
 				&& this.simFuncts.getCustomer().getTotalAmount() > this.simFuncts.getDealer().getTotalAmount()  ? 0 : 1;
 				
 		Boolean winOrLose = winOrLoseNumeric == 1 ? true : false;
+		
+		// Save stats for populating the table on the interface
+		Map<Integer, Boolean> tempMap = new HashMap<>();
+		tempMap.put(this.customerStartingAmount, winOrLose);
+		System.out.println("updating value: " + dealerStartingAmount + "of the map, adding: " +  tempMap.get(customerStartingAmount));
+		List<Map<Integer,Boolean>> tempList = new ArrayList<>();
+		tempList.add(tempMap);
+		
+		if(this.stats.get(dealerStartingAmount) != null)
+		{
+			this.stats.get(dealerStartingAmount).add(tempMap);	
+		} else { this.stats.put(dealerStartingAmount, tempList); }
 		
 		
 		this.aiObject.train(winOrLoseNumeric);
